@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../services/message.service';
+import { SongService } from '../../services/song.service';
+
+import { Song } from '../../models/song';
 import { Message } from '../../models/message';
 
 @Component({
@@ -11,14 +14,18 @@ export class HomeComponent implements OnInit {
 
   title = 'ECUAraoke';
 
-  constructor(public messageService: MessageService) { }
+  constructor(public messageService: MessageService, public songService: SongService) { }
 
   ngOnInit() {
   }
 
+  addASong() {
+    var song = new Song;
+    this.songService.addSongToQueue(song);
+  }
+
   addANewMessage() {
-    var message: Message = { text: 'This is an Alert from home page', title: 'Home Message', type: 'primary', close: true };
-    this.messageService.add(message);
+    this.addASong();
   }
 
   clearAllMessage() {
