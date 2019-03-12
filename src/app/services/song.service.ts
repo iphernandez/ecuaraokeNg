@@ -14,7 +14,7 @@ export class SongService {
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
   addSongToQueue(song: Song) {
-    if (!song || !song.id) this.messageService.add({
+    if (!song || !song.id) this.messageService.addMessage({
       id: -1,
       text: 'Cannot add song to queue',
       title: 'Queue Alert',
@@ -26,7 +26,7 @@ export class SongService {
 
   removeSongFromQueue(index: number) {
     if ((!index) || (index >= this.songQueue.length)) {
-      this.messageService.add({
+      this.messageService.addMessage({
         id: -1,
         text: `Cannot remove song ${index} from queue`,
         title: 'Queue Alert',

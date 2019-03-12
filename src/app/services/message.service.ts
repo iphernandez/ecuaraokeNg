@@ -11,22 +11,25 @@ export class MessageService {
 
   constructor() { }
 
-  add(message: Message) {
+  addMessage(message: Message) {
     message.id = this.messages.length;
     this.messages.push(message);
   }
 
-  remove(message: Message) {
-    var indexToRemove;
-
-    this.messages.forEach(function (currentMsg, index) {
-      if(currentMsg.id === message.id) indexToRemove = index;
-    });
-
+  removeMessage(message: Message) {
+    var indexToRemove = this.getMessageIndex(message);
     this.messages.splice(indexToRemove, 1);
   }
 
-  clear() {
+  getMessageIndex(message: Message) {
+    var indexToRemove;
+    this.messages.forEach(function (currentMsg, index) {
+      if (currentMsg.id === message.id) indexToRemove = index;
+    });
+    return indexToRemove;
+  }
+
+  clearMessages() {
     this.messages = [];
   }
 }

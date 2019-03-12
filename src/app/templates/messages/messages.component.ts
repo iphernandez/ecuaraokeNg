@@ -16,6 +16,6 @@ export class MessagesComponent implements OnInit {
   }
 
   removeMessage(message: Message) {
-    this.messageService.remove(message);
+    this.messageService.removeMessage(message);
   }
 }

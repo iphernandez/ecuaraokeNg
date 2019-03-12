@@ -3,7 +3,6 @@ import { MessageService } from '../../services/message.service';
 import { SongService } from '../../services/song.service';
 
 import { Song } from '../../models/song';
-import { Message } from '../../models/message';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +28,6 @@ export class HomeComponent implements OnInit {
   }
 
   clearAllMessage() {
-    this.messageService.clear();
+    this.messageService.clearMessages();
   }
 }
