@@ -14,6 +14,11 @@ export class MessageService {
   addMessage(message: Message) {
     message.id = this.messages.length;
     this.messages.push(message);
+    if (message.close) {
+      setTimeout(() => {
+        this.removeMessage(message);
+      }, 7000);
+    }
   }
 
   removeMessage(message: Message) {

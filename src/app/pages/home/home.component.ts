@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import { environment } from '../../../environments/environment';
+
 import { MessageService } from '../../services/message.service';
 import { SongService } from '../../services/song.service';
-
-import { Song } from '../../models/song';
 
 @Component({
   selector: 'app-home',
@@ -11,23 +12,20 @@ import { Song } from '../../models/song';
 })
 export class HomeComponent implements OnInit {
 
-  title = 'ECUAraoke';
+  appTitle = environment.appTitle;
+  appDescription = environment.appDescription;
 
-  constructor(public messageService: MessageService, public songService: SongService) { }
+  constructor(public songService: SongService) {
+  }
 
   ngOnInit() {
   }
 
-  addASong() {
-    var song = new Song;
-    this.songService.addSongToQueue(song);
+  deleteFromQueue(song) {
+    this.songService.removeSongFromQueue(song);
   }
 
-  addANewMessage() {
-    this.addASong();
-  }
-
-  clearAllMessage() {
-    this.messageService.clearMessages();
+  ngOnDestroy() {
+    //alert("THIS IS AN ALERT");
   }
 }

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  appTitle: "ECUAraoke",
+  appDescription: "Esta es una simple applicación que mantiene una lista de canciones para cantar en un karaoke"
 };
 
 /*

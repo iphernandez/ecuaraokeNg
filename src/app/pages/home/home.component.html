@@ -1,9 +1,50 @@
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-  <button (click)="addANewMessage()">Add an Alert</button>
-  <button (click)="clearAllMessage()">Clear All Alerts</button>
-
+  <div class="jumbotron ml-5 mr-5">
+    <h1 class="display-4">{{ appTitle }}</h1>
+    <p class="lead">{{ appDescription }}</p>
+    <div *ngIf="songService.songQueue.length <= 0">
+      <hr class="my-4">
+      <p>Recuerde que no hay que ponerse bravo si no funciona, solo es para pasarla bien con los panas, mijines o broders y cantar con el shungo a todo pulmón</p>
+      <a class="btn btn-primary btn-lg" routerLink="/about" role="button">Más información</a>
+    </div>
+  </div>
+  <div *ngIf="songService.songQueue.length > 0" class="ml-2 mr-2">
+    <table class="table table-responsive-sm table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Número</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Artista</th>
+          <th scope="col">Genero</th>
+          <th scope="col">"Cantante"</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let song of songService.songQueue; let i = index" [ngClass]="{'bg-success' : i == 0}">
+          <th scope="row">{{i}}</th>
+          <td>{{song.id}}</td>
+          <td>{{song.titulo}}</td>
+          <td>{{song.artista}}</td>
+          <td>{{song.genero}}</td>
+          <td>{{song.cantante}}</td>
+          <td>
+            <button type="button" class="btn btn-outline-danger" (click)="deleteFromQueue(song)">
+              <i class="fas fa-minus-circle"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="songService.songQueue.length <= 0" class="mx-auto w-75 p-3">
+    <blockquote class="blockquote display-4">
+      <p>
+        La lista de canciones esta vacía. No sea malito y de buscando sus canciones arriba (en la esquina superior derecha),
+        ahí donde dice <span><em><strong>"De Buscando"</strong></em></span>, ahí. Encuentre la canción, y cuando la seleccione, se agregará a la lista.
+      </p>
+      <p>Verá que no es tan difícil buscar, alzando pelito; no me hará tener iras verá!</p>
+    </blockquote>
+  </div>
 </div>

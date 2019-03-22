@@ -1,8 +1,8 @@
 export class Song {
   id: number;
-  name: string;
-  artist: string;
-  gender: string;
+  titulo: string;
+  artista: string;
+  genero: string;
   cantante: string;
   index: number;
 }

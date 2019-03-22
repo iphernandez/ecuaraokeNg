@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,6 +12,9 @@ import { FooterComponent } from './templates/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MessagesComponent } from './templates/messages/messages.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ListComponent } from './pages/list/list.component';
+import { SongFilterPipe } from './services/song-filter.pipe';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
@@ -21,13 +24,17 @@ import { AboutComponent } from './pages/about/about.component';
     FooterComponent,
     HomeComponent,
     MessagesComponent,
-    AboutComponent
+    AboutComponent,
+    ListComponent,
+    SongFilterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   providers: [],
