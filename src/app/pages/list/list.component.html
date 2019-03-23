@@ -1,0 +1,43 @@
+<div class="jumbotron jumbotron-fluid mb-1 pt-5 pl-5 pr-5 pb-1">
+  <h1 class="display-4">Lista de canciones</h1>
+  <p class="lead">La lista es larguita, asi que no se cansará.</p>
+  <hr class="my-4">
+</div>
+<div *ngIf="!songService.allSongs" class="d-flex justify-content-center m-auto">
+  <div class="spinner-border text-primary text-center" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="songService.allSongs && songService.allSongs.length > 0" class="ml-5 mr-5">
+  <div class="form-group form-inline">
+    Busque aqui su canción:
+    <input class="form-control ml-2" type="text" [(ngModel)]="searchText" />
+  </div>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Artista</th>
+        <th scope="col">Genero</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let song of songService.allSongs | songFilter : searchText; let i = index">
+        <th scope="row">{{song.id}}</th>
+        <td>{{song.titulo}}</td>
+        <td>{{song.artista}}</td>
+        <td>{{song.genero}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-success"
+                  (click)="addToQueue(song)"
+                  placement="top"
+                  ngbTooltip="Agregar a la lista...pero solo si va a cantar, no hará de agregar por las puras.">
+            <i class="fas fa-plus-circle"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
