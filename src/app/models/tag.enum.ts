@@ -21,7 +21,7 @@ export enum Tag {
   MERENGUE = 'Ya va, hecho el caribeño',
   VALS = 'Hecho el de la realeza te noto',
   FOLCKLORICA = 'La misma musica de tus papas te ha gustado',
-  POP = 'Ya vas a decir que eres milenial…anda ve viejito',
+  POP = 'Ya vas a decir que eres milenial…anda ve viejit@',
   ALBAZO = 'Iiiiissseeee! Extrañando la llacta estas',
   SANJUANITO = 'Iiiiissseeee! Extrañando la llacta estas',
   MAMBO = 'Ya va, hecho el caribeño',

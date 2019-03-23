@@ -16,6 +16,11 @@
   </ul>
   <form class="form-inline"
         *ngIf="authService.isLoggedIn()">
+    <div *ngIf="searching" class="d-flex justify-content-center mr-2">
+      <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <input class="form-control mr-sm-2" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
            [(ngModel)]="selectedSong"
            [ngbTypeahead]="search"

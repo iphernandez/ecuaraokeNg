@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap, catchError } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -18,6 +18,8 @@ import { Song } from '../../models/song';
 export class NavbarComponent implements OnInit {
   selectedSong: Song;
   appTitle: string;
+  searching = false;
+  searchFailed = false;
 
   constructor(public messageService: MessageService,
     public songService: SongService,
@@ -27,12 +29,28 @@ export class NavbarComponent implements OnInit {
     this.appTitle = environment.appTitle;
   }
 
+  //search = (text$: Observable<string>) =>
+  //  text$.pipe(
+  //    debounceTime(200),
+  //    distinctUntilChanged(),
+  //    map(term => term.length < 2 ? []
+  //      : this.songService.allSongs.filter(v => ((v.titulo.toLowerCase().indexOf(term.toLowerCase()) > -1) || (v.artista.toLowerCase().indexOf(term.toLowerCase()) > -1))).slice(0, 15))
+  //  )
+
   search = (text$: Observable<string>) =>
     text$.pipe(
-      debounceTime(200),
+      debounceTime(300),
       distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : this.songService.allSongs.filter(v => ((v.titulo.toLowerCase().indexOf(term.toLowerCase()) > -1) || (v.artista.toLowerCase().indexOf(term.toLowerCase()) > -1))).slice(0, 15))
+      tap(() => this.searching = true),
+      switchMap(term => term.length < 3 ? of([]) :
+        this.songService.searchSong(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
     )
 
   formatter = (x: { titulo: string }) => null;

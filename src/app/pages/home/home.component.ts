@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
-import { MessageService } from '../../services/message.service';
 import { SongService } from '../../services/song.service';
+
+import { Song } from '../../models/song';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,7 @@ import { SongService } from '../../services/song.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  refreshQueue: Subscription;
   appTitle = environment.appTitle;
   appDescription = environment.appDescription;
 
@@ -19,6 +21,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.refreshQueue = interval(20000).subscribe(x => {
+      this.songService.getSongQueue();
+    });
   }
 
   deleteFromQueue(song) {
@@ -26,6 +31,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    //alert("THIS IS AN ALERT");
+    this.refreshQueue.unsubscribe();
   }
 }
