@@ -9,7 +9,7 @@ import { SongFilterPipe } from '../../services/song-filter.pipe';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  searchText: string = "";
+  searchText = '';
 
   constructor(public songService: SongService) {
   }
@@ -22,6 +22,6 @@ export class ListComponent implements OnInit {
   }
 
   clearFilter() {
-    this.searchText = "";
+    this.searchText = '';
   }
 }

@@ -21,21 +21,14 @@ export class NavbarComponent implements OnInit {
   searching = false;
   searchFailed = false;
 
-  constructor(public messageService: MessageService,
+  constructor(
+    public messageService: MessageService,
     public songService: SongService,
     private authService: AuthService) { }
 
   ngOnInit() {
     this.appTitle = environment.appTitle;
   }
-
-  //search = (text$: Observable<string>) =>
-  //  text$.pipe(
-  //    debounceTime(200),
-  //    distinctUntilChanged(),
-  //    map(term => term.length < 2 ? []
-  //      : this.songService.allSongs.filter(v => ((v.titulo.toLowerCase().indexOf(term.toLowerCase()) > -1) || (v.artista.toLowerCase().indexOf(term.toLowerCase()) > -1))).slice(0, 15))
-  //  )
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -56,7 +49,7 @@ export class NavbarComponent implements OnInit {
   formatter = (x: { titulo: string }) => null;
 
   selectedSongEvent(item) {
-    var songToAdd: Song = item.item;
+    const songToAdd: Song = item.item;
     this.songService.addSongToQueue(songToAdd);
   }
 }

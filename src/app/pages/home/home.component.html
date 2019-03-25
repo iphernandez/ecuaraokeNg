@@ -1,5 +1,5 @@
 <div style="text-align:center">
-  <div class="jumbotron ml-5 mr-5">
+  <div class="jumbotron mx-5 pb-1">
     <h1 class="display-4">{{ appTitle }}</h1>
     <p class="lead">{{ appDescription }}</p>
     <div *ngIf="!songService.songQueue || songService.songQueue.length <= 0">
@@ -8,7 +8,15 @@
       <a class="btn btn-primary btn-lg" routerLink="/about" role="button">Más información</a>
     </div>
   </div>
-  <div *ngIf="songService.songQueue && songService.songQueue.length > 0" class="ml-2 mr-2 mb-5">
+  <div *ngIf="songService.songQueue && songService.songQueue.length > 0" class="mx-2 mb-5">
+    <div class="float-right">
+      <div *ngIf="refreshing" class="d-inline-block mr-2">
+        <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm text-white" (click)="manualRefreshQueue()" role="button">Actualizar lista</a>
+    </div>
     <table class="table table-responsive-sm table-striped">
       <thead class="thead-dark">
         <tr>
