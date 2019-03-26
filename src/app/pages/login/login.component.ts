@@ -17,10 +17,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
   appTitle = environment.appTitle;
+  appDescription = environment.appDescription;
   loading = false;
   submitted = false;
 
-  constructor(public authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router) { }

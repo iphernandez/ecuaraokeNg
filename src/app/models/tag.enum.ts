@@ -1,5 +1,4 @@
 export class EnvironmentTag {
-  
 }
 
 export enum Tag {

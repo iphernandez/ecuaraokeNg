@@ -1,0 +1,16 @@
+{
+  "mensajes": {
+    "listaVacia": {
+      "titulo": "La lista de canciones esta vacia",
+      "texto": "No sea malito y de buscando canciones vea!"
+    },
+    "agregarLista": {
+      "titulo": "Cancion agragada",
+      "texto":  "Cantara bien vea, no hara quedar mal!"
+    },
+    "busquedaVacia": {
+      "titulo": "No se encontro canciones",
+      "texto": "Ele por shunsho, alzando pelito vuelva a buscar!"
+    }
+  }
+}

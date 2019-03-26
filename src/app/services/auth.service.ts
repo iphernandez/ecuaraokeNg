@@ -19,20 +19,20 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    if (this.currentUser) return true;
+    if (this.currentUser) { return true; }
     return false;
   }
 
-  hasExpired(expiration: Date): Boolean {
-    var currentDate = new Date();
-    var difference = expiration.getDate() - currentDate.getDate();
+  hasExpired(expiration: Date): boolean {
+    const currentDate = new Date();
+    const difference = expiration.getDate() - currentDate.getDate();
     return difference !== 1;
   }
 
-  authenticateUser(name: string) {
-    var user: User = {
+  authenticateUser(userName: string) {
+    const user: User = {
       id: this.generateId(),
-      name: name,
+      name: userName,
       expires: this.getExpiration()
     };
 
@@ -45,15 +45,13 @@ export class AuthService {
   }
 
   generateId() {
-    var max = 100,
-      min = 1;
+    const max = 100;
+    const min = 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   getExpiration(): Date {
-    var currentDate: Date = new Date();
-    //return new Date(currentDate.setDate(currentDate.getTime() + (1000 * 10)));
-
+    const currentDate: Date = new Date();
     return new Date(currentDate.setDate(currentDate.getDate() + 1));
   }
 
