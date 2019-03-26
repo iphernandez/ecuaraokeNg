@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public messageService: MessageService,
     public songService: SongService,
-    private authService: AuthService) { }
+    public authService: AuthService) { }
 
   ngOnInit() {
     this.appTitle = environment.appTitle;

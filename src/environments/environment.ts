@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appTitle: 'ECUAraoke',
+  appTitle: 'ECUAraoke (DEV)',
   appDescription: 'Esta es una simple applicación que mantiene una lista de canciones para cantar en un karaoke',
   apiUrl: 'http://localhost:40908/api/'
 };
