@@ -22,14 +22,14 @@ export class MessageService {
   }
 
   removeMessage(message: Message) {
-    var indexToRemove = this.getMessageIndex(message);
+    const indexToRemove = this.getMessageIndex(message);
     this.messages.splice(indexToRemove, 1);
   }
 
   getMessageIndex(message: Message) {
-    var indexToRemove;
-    this.messages.forEach(function (currentMsg, index) {
-      if (currentMsg.id === message.id) indexToRemove = index;
+    let indexToRemove;
+    this.messages.forEach((currentMsg, index) => {
+      if (currentMsg.id === message.id) { indexToRemove = index; }
     });
     return indexToRemove;
   }

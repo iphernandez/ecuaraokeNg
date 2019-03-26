@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
@@ -12,10 +12,11 @@ import { Song } from '../../models/song';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   refreshQueue: Subscription;
   appTitle = environment.appTitle;
   appDescription = environment.appDescription;
+  refreshing = false;
 
   constructor(public songService: SongService) {
   }
@@ -26,11 +27,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.refreshQueue.unsubscribe();
+  }
+
+  manualRefreshQueue() {
+    this.refreshing = true;
+    setTimeout(() => {
+      this.songService.getSongQueue();
+      this.refreshing = false;
+    }, 2000);
+  }
   deleteFromQueue(song) {
     this.songService.removeSongFromQueue(song);
   }
 
-  ngOnDestroy() {
-    this.refreshQueue.unsubscribe();
-  }
 }

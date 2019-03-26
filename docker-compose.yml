@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "41100:41100"
+    volumes:
+      - .:/opt/ecuakaraokeNg
+  api:
+    build:
+      context: ../ecuaraoke/
+      args:
+        - port_number=40908
+    ports:
+      - "40908:40908"
+    depends_on:
+      - web
+    volumes:
+      - ../ecuaraoke/:/opt/ecuakaraoke

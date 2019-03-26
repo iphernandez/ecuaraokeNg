@@ -29,7 +29,8 @@ export class SongService {
   songQueue: Song[];
 
 
-  constructor(private httpClient: HttpClient,
+  constructor(
+    private httpClient: HttpClient,
     private messageService: MessageService,
     private authService: AuthService) {
 
@@ -68,10 +69,10 @@ export class SongService {
         close: true
       });
     } else {
-      var songToAdd: Song = Object.assign({}, song);
+      const songToAdd: Song = Object.assign({}, song);
       songToAdd.cantante = this.authService.currentUser.name;
 
-      var addSongObj = this.getSendObj();
+      const addSongObj = this.getSendObj();
       addSongObj.songs.push(songToAdd);
 
       this.httpClient.post(this.endpoints.queue, JSON.stringify(addSongObj))
@@ -92,7 +93,7 @@ export class SongService {
               text: 'Cantara bien, no hará quedar mal. Alzando pelito!',
               title: `La canción ${songToAdd.titulo} se agregó en la lista para ${songToAdd.cantante.toUpperCase()}`,
               type: 'alert-success',
-              tag: songToAdd.genero.replace(/[&.][\s*]/, "").trim(),
+              tag: songToAdd.genero.replace(/[&.][\s*]/, '').trim(),
               close: true
             });
           }
@@ -101,7 +102,7 @@ export class SongService {
   }
 
   removeSongFromQueue(song: Song) {
-    var index = this.songQueue.indexOf(song);
+    const index = this.songQueue.indexOf(song);
     if ((index < 0) || (index >= this.songQueue.length)) {
       this.messageService.addMessage({
         id: -1,
@@ -112,10 +113,10 @@ export class SongService {
         close: true
       });
     } else {
-      var addSongObj = this.getSendObj();
+      const addSongObj = this.getSendObj();
       addSongObj.songs.push(song);
 
-      var deleteHttpOptions = {
+      const deleteHttpOptions = {
         headers: {},
         body: JSON.stringify(addSongObj)
       };
@@ -135,7 +136,7 @@ export class SongService {
             this.songQueue = res.data;
             this.messageService.addMessage({
               id: -1,
-              text: `Uuuuu!!! ${song.cantante} ya se acholó. Busque otra mejor breve breve para que cante`,
+              text: `Uuuuu!!! ${song.cantante} ya se acholó. Busque otra canción mejor breve breve para que cante`,
               title: `La canción  ${song.titulo}  se borró de la lista`,
               type: 'alert-warning',
               tag: null,
@@ -150,6 +151,6 @@ export class SongService {
     return this.httpClient.get(`${this.endpoints.list}/${term}`, this.httpOptions)
       .pipe(
         map((res: Result) => res.data)
-    );
+      );
   }
 }
