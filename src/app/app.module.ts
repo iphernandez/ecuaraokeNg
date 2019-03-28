@@ -15,6 +15,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ListComponent } from './pages/list/list.component';
 import { SongFilterPipe } from './services/song-filter.pipe';
 import { LoginComponent } from './pages/login/login.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoginComponent } from './pages/login/login.component';
     AboutComponent,
     ListComponent,
     SongFilterPipe,
-    LoginComponent
+    LoginComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

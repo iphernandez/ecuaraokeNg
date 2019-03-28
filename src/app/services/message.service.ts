@@ -17,7 +17,7 @@ export class MessageService {
     if (message.close) {
       setTimeout(() => {
         this.removeMessage(message);
-      }, 7000);
+      }, 10000);
     }
   }
 
