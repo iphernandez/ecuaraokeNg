@@ -36,6 +36,14 @@
                   ngbTooltip="Agregar a la lista...pero solo si va a cantar, no hará de agregar por las puras.">
             <i class="fas fa-plus-circle"></i>
           </button>
+          <button type="button" class="btn btn-outline-warning"
+                  [disabled]="songService.isSongAFav(song)"
+                  (click)="songService.addSongToFavorites($event, song)"
+                  placement="top"
+                  ngbTooltip="Agregar a la lista de favorita...pero solo si la cancion no esta en su lista">
+            <i class="fa-star"
+               [ngClass]="{'far' : !songService.isSongAFav(song), 'fas': songService.isSongAFav(song) }"></i>
+          </button>
         </td>
       </tr>
     </tbody>

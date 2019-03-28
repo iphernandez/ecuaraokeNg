@@ -10,6 +10,10 @@
          routerLinkActive="active">Lista</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" routerLink="/favs"
+         routerLinkActive="active">Favoritas</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" routerLink="/about"
          routerLinkActive="active">Info</a>
     </li>
@@ -41,6 +45,14 @@
 </nav>
 
 <ng-template #rt let-r="result" let-t="term">
-  <ngb-highlight [result]="r.titulo" [term]="t"></ngb-highlight> -
-  <ngb-highlight [result]="r.artista" [term]="t"></ngb-highlight>
+  <span class="text-wrap align-middle">
+    <ngb-highlight [result]="r.titulo" [term]="t"></ngb-highlight> -
+    <ngb-highlight [result]="r.artista" [term]="t"></ngb-highlight>
+  </span>
+  <a class="btn btn-outline-warning btn-sm border-0 text-warning float-right ml-2"
+     (click)="songService.addSongToFavorites($event, r)"
+     role="button">
+    <i class="fa-star"
+       [ngClass]="{'far' : !songService.isSongAFav(r), 'fas': songService.isSongAFav(r) }"></i>
+  </a>
 </ng-template>

@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.refreshing = false;
     }, 2000);
   }
+
   deleteFromQueue(song) {
     this.songService.removeSongFromQueue(song);
   }
