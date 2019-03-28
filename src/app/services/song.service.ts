@@ -56,7 +56,10 @@ export class SongService {
   getSongFavs() {
     // Getting favorites songs
     let favObj = JSON.parse(localStorage.getItem('favoriteSongs'));
-    this.songFavs = favObj[this.authService.currentUser.name] || [];
+
+    this.songFavs = this.authService.currentUser && this.authService.currentUser.name ?
+      favObj? favObj[this.authService.currentUser.name] || [] : [] :
+      [];
   }
 
   getSendObj() {
