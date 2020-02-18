@@ -37,6 +37,7 @@ speed-measure-plugin.json
 *.njsproj
 *.sln
 .vs
+.vscode
 
 # misc
 /.sass-cache
