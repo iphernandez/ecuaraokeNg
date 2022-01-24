@@ -55,10 +55,10 @@ export class SongService {
 
   getSongFavs() {
     // Getting favorites songs
-    let favObj = JSON.parse(localStorage.getItem('favoriteSongs'));
+    const favObj = JSON.parse(localStorage.getItem('favoriteSongs'));
 
     this.songFavs = this.authService.currentUser && this.authService.currentUser.name ?
-      favObj? favObj[this.authService.currentUser.name] || [] : [] :
+      favObj ? favObj[this.authService.currentUser.name] || [] : [] :
       [];
   }
 
@@ -167,7 +167,7 @@ export class SongService {
   addSongToFavorites(event: Event, song: Song) {
     event.stopPropagation();
     if (!this.isSongAFav(song)) {
-      let songToAdd = Object.assign({}, song);
+      const songToAdd = Object.assign({}, song);
       songToAdd.index = this.songFavs.length + 1;
       this.songFavs.push(songToAdd);
       this.saveFavoriteSongs();
@@ -217,7 +217,7 @@ export class SongService {
 
   saveFavoriteSongs() {
     localStorage.removeItem('favoriteSongs');
-    let favObj = {};
+    const favObj = {};
     favObj[this.authService.currentUser.name] = this.songFavs;
     localStorage.setItem('favoriteSongs', JSON.stringify(favObj));
   }
