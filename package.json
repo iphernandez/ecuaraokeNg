@@ -32,7 +32,7 @@
     "@angular/platform-browser": "^13.3.12",
     "@angular/platform-browser-dynamic": "^13.3.12",
     "@angular/router": "^13.3.12",
-    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "bootstrap": "^4.6.1",
     "core-js": "^3.20.3",
     "jquery": "^3.6.0",
