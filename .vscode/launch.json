@@ -12,7 +12,7 @@
             "runtimeArgs": [
                 "start"
             ],
-            "port": 9229,
+            //"port": 9229,
             "skipFiles": [
                 "<node_internals>/**"
             ]
