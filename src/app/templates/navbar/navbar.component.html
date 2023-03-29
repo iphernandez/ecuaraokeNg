@@ -18,14 +18,14 @@
          routerLinkActive="active">Info</a>
     </li>
   </ul>
-  <form class="form-inline"
+  <form class="form-inline position-relative end-0"
         *ngIf="authService.isLoggedIn()">
-    <div *ngIf="searching" class="d-flex justify-content-center mr-2">
+    <div *ngIf="searching" class="d-flex justify-content-center me-2">
       <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <input class="form-control mr-sm-2" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
+    <input class="form-control me-sm-2" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
            [(ngModel)]="selectedSong"
            [ngbTypeahead]="search"
            [resultTemplate]="rt"
@@ -33,13 +33,13 @@
            (selectItem)="selectedSongEvent($event)" />
     <!--<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>-->
   </form>
-  <div class="dropdown" *ngIf="authService.isLoggedIn()">
-    <button class="btn btn-outline-primary dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton"
+  <div ngbDropdown class="dropdown" *ngIf="authService.isLoggedIn()">
+    <button ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{authService.currentUser.name}}
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#" (click)="authService.logoutUser()">Log out</a>
+    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a ngbDropdownItem class="dropdown-item" href="#" (click)="authService.logoutUser()">Log out</a>
     </div>
   </div>
 </nav>
