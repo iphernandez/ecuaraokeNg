@@ -1,31 +1,31 @@
-<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light mb-1">
-  <span class="navbar-brand">{{appTitle}}</span>
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-primary mb-1 px-1 w-auto">
+  <span class="navbar-brand text-brand-color">{{appTitle}}</span>
   <ul class="navbar-nav mr-auto" *ngIf="authService.isLoggedIn()">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/home"
+      <a class="nav-link text-light" routerLink="/home"
          routerLinkActive="active">Hogar/Caleta</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/list"
+      <a class="nav-link text-light" routerLink="/list"
          routerLinkActive="active">Lista</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/favs"
+      <a class="nav-link text-light" routerLink="/favs"
          routerLinkActive="active">Favoritas</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/about"
+      <a class="nav-link text-light" routerLink="/about"
          routerLinkActive="active">Info</a>
     </li>
   </ul>
-  <form class="form-inline position-relative end-0"
+  <form class="form-inline position-relative"
         *ngIf="authService.isLoggedIn()">
     <div *ngIf="searching" class="d-flex justify-content-center me-2">
       <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <input class="form-control me-sm-2" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
+    <input class="form-control me-sm-2 mx-1" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
            [(ngModel)]="selectedSong"
            [ngbTypeahead]="search"
            [resultTemplate]="rt"
@@ -33,8 +33,8 @@
            (selectItem)="selectedSongEvent($event)" />
     <!--<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>-->
   </form>
-  <div ngbDropdown class="dropdown" *ngIf="authService.isLoggedIn()">
-    <button ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton"
+  <div ngbDropdown class="dropdown mx-2" *ngIf="authService.isLoggedIn()">
+    <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{authService.currentUser.name}}
     </button>

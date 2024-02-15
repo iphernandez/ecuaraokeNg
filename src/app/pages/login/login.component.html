@@ -1,39 +1,46 @@
-<div class="text-center">
-  <div class="jumbotron mx-5 pb-3">
+<div class="p-5 my-4 rounded-3 bg-white mx-auto text-center" style="width: 90%;">
+  <div class="container-fluid">
     <h1 class="display-4">{{ appTitle }}</h1>
     <p class="lead">{{ appDescription }}</p>
     <hr class="my-4">
-    <span class="lead font-weight-bold">Que fue ve! Ques de vos ve! Listo para cantar en el karaoke, entonces ingresa tu nombre o apodo</span>
+    <span class="lead fw-bold">Que fue ve! Ques de vos ve! Listo para cantar en el karaoke, entonces ingresa tu nombre o
+      apodo</span>
   </div>
 </div>
-<div class="container">
+<div class="container rounded-3 bg-transparent mx-auto">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 mx-auto">
       <blockquote>
-        <span class="lead mb-0">¿Sabes por qué necesitas ingresar tu nombre? Haber haber... ( a mover la colita...)</span>
+        <span class="lead mb-1">¿Sabes por qué necesitas ingresar tu nombre? Haber haber... ( a mover la
+          colita...)</span>
         <ul>
           <li>Primero porque se necesita saber quién va a cantar una canción</li>
           <li>Segundo porque después se hacen los locos, y dicen "Yo no pedí" o "Yo no puse esa canción"</li>
-          <li>Tercero para que tus amigos puedan hacerte un poco de "bullying" cuando cantes, o cuando hayas escogido una canción "especial"</li>
+          <li>Tercero para que tus amigos puedan hacerte un poco de "bullying" cuando cantes, o cuando hayas escogido
+            una canción "especial"</li>
           <li>Cuarto... ¿no será de tomarse un traguito?</li>
         </ul>
-        <mark><small><strong>* Su nombre o apodo será guardado en este dispositivo, si va a otro dispositivo tendrá que ingresar su nombre otra vez. Entendió?!</strong></small></mark>
+        <mark><small><strong>* Su nombre o apodo será guardado en este dispositivo, si va a otro dispositivo tendrá que
+              ingresar su nombre otra vez. Entendió?!</strong></small></mark>
       </blockquote>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4 ml-auto mr-auto">
+    <div class="col-md-4 mx-auto mb-5">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+        <div class="form-group mb-2">
           <label for="username">Nombre/Apodo</label>
-          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <input type="text" formControlName="username" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Haber haber, de poniendo su nombre o apodo, sino no va a poder cantar</div>
+            <div *ngIf="f.username.errors.required">Haber haber, de poniendo su nombre o apodo, sino no va a poder
+              cantar</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
           <button [disabled]="loading" class="btn btn-primary">Login</button>
-          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <img *ngIf="loading"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
       </form>
     </div>
