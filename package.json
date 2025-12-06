@@ -58,8 +58,5 @@
     "karma": "^6.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
-  },
-  "overrides": {
-    "tough-cookie": "^4.1.3"
   }
 }
