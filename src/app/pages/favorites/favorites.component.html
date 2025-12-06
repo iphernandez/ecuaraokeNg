@@ -5,50 +5,56 @@
   <p><mark><small><strong>* Tus canciones favoritas serán guardadas en este dispositivo, si vas a otro dispositivo tendrás que agregarlas otra vez. Entendió?!</strong></small></mark></p>
 </div>
 <div style="text-align:center">
-  <div *ngIf="songService.songFavs && songService.songFavs.length > 0" class="mx-2 mb-5">
-    <table class="table table-responsive-sm table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Número</th>
-          <th scope="col">Titulo</th>
-          <th scope="col">Artista</th>
-          <th scope="col">Genero</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let song of songService.songFavs; let i = index">
-          <th scope="row">{{i}}</th>
-          <td>{{song.id}}</td>
-          <td>{{song.titulo}}</td>
-          <td>{{song.artista}}</td>
-          <td>{{song.genero}}</td>
-          <td>
-            <button type="button" class="btn btn-outline-success"
-                    (click)="songService.addSongToQueue(song)"
-                    placement="top"
-                    ngbTooltip="Agregar a la lista...pero solo si va a cantar, no hará de agregar por las puras.">
-              <i class="fas fa-plus-circle"></i>
-            </button>
-            <button type="button" class="btn btn-outline-danger"
-                    (click)="songService.removeSongFromFavorites(song)"
-                    placement="top"
-                    ngbTooltip="Borrar de tus favoritas...no te arrepientas despues, veras que no hay como recuperarla.">
-              <i class="fas fa-minus-circle"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="!songService.songFavs || songService.songFavs.length <= 0" class="mx-auto w-75 p-3">
-    <blockquote class="blockquote display-4">
-      <p>
-        La lista de tus canciones favoritas esta vacía. No sea malito y de buscando sus canciones arriba (en la esquina superior derecha),
-        ahí donde dice <span><em><strong>"De Buscando"</strong></em></span>, ahí. Encuentre la canción, pica en el boton y se agregará a la lista.
-      </p>
-      <p>Verá que no es tan difícil buscar ni seleccionar, alzando pelito; no me hará tener iras verá!</p>
-    </blockquote>
-  </div>
+  @if (songService.songFavs && songService.songFavs.length > 0) {
+    <div class="mx-2 mb-5">
+      <table class="table table-responsive-sm table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Número</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Artista</th>
+            <th scope="col">Genero</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (song of songService.songFavs; track song; let i = $index) {
+            <tr>
+              <th scope="row">{{i}}</th>
+              <td>{{song.id}}</td>
+              <td>{{song.titulo}}</td>
+              <td>{{song.artista}}</td>
+              <td>{{song.genero}}</td>
+              <td>
+                <button type="button" class="btn btn-outline-success"
+                  (click)="songService.addSongToQueue(song)"
+                  placement="top"
+                  ngbTooltip="Agregar a la lista...pero solo si va a cantar, no hará de agregar por las puras.">
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+                <button type="button" class="btn btn-outline-danger"
+                  (click)="songService.removeSongFromFavorites(song)"
+                  placement="top"
+                  ngbTooltip="Borrar de tus favoritas...no te arrepientas despues, veras que no hay como recuperarla.">
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (!songService.songFavs || songService.songFavs.length <= 0) {
+    <div class="mx-auto w-75 p-3">
+      <blockquote class="blockquote display-4">
+        <p>
+          La lista de tus canciones favoritas esta vacía. No sea malito y de buscando sus canciones arriba (en la esquina superior derecha),
+          ahí donde dice <span><em><strong>"De Buscando"</strong></em></span>, ahí. Encuentre la canción, pica en el boton y se agregará a la lista.
+        </p>
+        <p>Verá que no es tan difícil buscar ni seleccionar, alzando pelito; no me hará tener iras verá!</p>
+      </blockquote>
+    </div>
+  }
 </div>
