@@ -1,58 +1,66 @@
 <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light mb-1">
   <span class="navbar-brand">{{appTitle}}</span>
-  <ul class="navbar-nav mr-auto" *ngIf="authService.isLoggedIn()">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/home"
-         routerLinkActive="active">Hogar/Caleta</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/list"
-         routerLinkActive="active">Lista</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/favs"
-         routerLinkActive="active">Favoritas</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/about"
-         routerLinkActive="active">Info</a>
-    </li>
-  </ul>
-  <form class="form-inline position-relative end-0"
-        *ngIf="authService.isLoggedIn()">
-    <div *ngIf="searching" class="d-flex justify-content-center me-2">
-      <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
-        <span class="sr-only">Loading...</span>
+  @if (authService.isLoggedIn()) {
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home"
+        routerLinkActive="active">Hogar/Caleta</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/list"
+        routerLinkActive="active">Lista</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/favs"
+        routerLinkActive="active">Favoritas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about"
+        routerLinkActive="active">Info</a>
+      </li>
+    </ul>
+  }
+  @if (authService.isLoggedIn()) {
+    <form class="form-inline position-relative end-0"
+      >
+      @if (searching) {
+        <div class="d-flex justify-content-center me-2">
+          <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      }
+      <input class="form-control me-sm-2" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
+        [(ngModel)]="selectedSong"
+        [ngbTypeahead]="search"
+        [resultTemplate]="rt"
+        [inputFormatter]="formatter"
+        (selectItem)="selectedSongEvent($event)" />
+        <!--<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>-->
+      </form>
+    }
+    @if (authService.isLoggedIn()) {
+      <div ngbDropdown class="dropdown">
+        <button ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{authService.currentUser.name}}
+        </button>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a ngbDropdownItem class="dropdown-item" href="#" (click)="authService.logoutUser()">Log out</a>
+        </div>
       </div>
-    </div>
-    <input class="form-control me-sm-2" name="first" type="search" placeholder="De buscando!..." aria-label="Search"
-           [(ngModel)]="selectedSong"
-           [ngbTypeahead]="search"
-           [resultTemplate]="rt"
-           [inputFormatter]="formatter"
-           (selectItem)="selectedSongEvent($event)" />
-    <!--<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>-->
-  </form>
-  <div ngbDropdown class="dropdown" *ngIf="authService.isLoggedIn()">
-    <button ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{authService.currentUser.name}}
-    </button>
-    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a ngbDropdownItem class="dropdown-item" href="#" (click)="authService.logoutUser()">Log out</a>
-    </div>
-  </div>
-</nav>
+    }
+  </nav>
 
-<ng-template #rt let-r="result" let-t="term">
-  <span class="text-wrap align-middle">
-    <ngb-highlight [result]="r.titulo" [term]="t"></ngb-highlight> -
-    <ngb-highlight [result]="r.artista" [term]="t"></ngb-highlight>
-  </span>
-  <a class="btn btn-outline-warning btn-sm border-0 text-warning float-right ml-2"
-     (click)="songService.addSongToFavorites($event, r)"
-     role="button">
-    <i class="fa-star"
-       [ngClass]="{'far' : !songService.isSongAFav(r), 'fas': songService.isSongAFav(r) }"></i>
-  </a>
-</ng-template>
+  <ng-template #rt let-r="result" let-t="term">
+    <span class="text-wrap align-middle">
+      <ngb-highlight [result]="r.titulo" [term]="t"></ngb-highlight> -
+      <ngb-highlight [result]="r.artista" [term]="t"></ngb-highlight>
+    </span>
+    <a class="btn btn-outline-warning btn-sm border-0 text-warning float-right ml-2"
+      (click)="songService.addSongToFavorites($event, r)"
+      role="button">
+      <i class="fa-star"
+      [ngClass]="{'far' : !songService.isSongAFav(r), 'fas': songService.isSongAFav(r) }"></i>
+    </a>
+  </ng-template>

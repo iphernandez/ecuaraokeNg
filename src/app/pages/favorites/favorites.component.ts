@@ -6,9 +6,10 @@ import { SongService } from '../../services/song.service';
 
 
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss']
+    selector: 'app-favorites',
+    templateUrl: './favorites.component.html',
+    styleUrls: ['./favorites.component.scss'],
+    standalone: false
 })
 export class FavoritesComponent implements OnInit {
   appTitle = environment.appTitle;

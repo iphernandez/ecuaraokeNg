@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Song } from '../models/song';
 
 @Pipe({
-  name: 'songFilter'
+    name: 'songFilter',
+    standalone: false
 })
 export class SongFilterPipe implements PipeTransform {
 

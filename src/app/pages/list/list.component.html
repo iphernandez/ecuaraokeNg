@@ -3,49 +3,55 @@
   <p class="lead">La lista es larguita, asi que no se cansará.</p>
   <hr class="my-4">
 </div>
-<div *ngIf="!songService.allSongs" class="d-flex justify-content-center m-auto">
-  <div class="spinner-border text-primary text-center" role="status">
-    <span class="sr-only">Loading...</span>
+@if (!songService.allSongs) {
+  <div class="d-flex justify-content-center m-auto">
+    <div class="spinner-border text-primary text-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
-</div>
-<div *ngIf="songService.allSongs && songService.allSongs.length > 0" class="ml-5 mr-5">
-  <div class="form-group form-inline">
-    Busque aqui su canción:
-    <input class="form-control ml-2" type="text" [(ngModel)]="searchText" />
+}
+@if (songService.allSongs && songService.allSongs.length > 0) {
+  <div class="ml-5 mr-5">
+    <div class="form-group form-inline">
+      Busque aqui su canción:
+      <input class="form-control ml-2" type="text" [(ngModel)]="searchText" />
+    </div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Artista</th>
+          <th scope="col">Genero</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (song of songService.allSongs | songFilter : searchText; track song; let i = $index) {
+          <tr>
+            <th scope="row">{{song.id}}</th>
+            <td>{{song.titulo}}</td>
+            <td>{{song.artista}}</td>
+            <td>{{song.genero}}</td>
+            <td>
+              <button type="button" class="btn btn-outline-success"
+                (click)="addToQueue(song)"
+                placement="top"
+                ngbTooltip="Agregar a la lista...pero solo si va a cantar, no hará de agregar por las puras.">
+                <i class="fas fa-plus-circle"></i>
+              </button>
+              <button type="button" class="btn btn-outline-warning"
+                [disabled]="songService.isSongAFav(song)"
+                (click)="songService.addSongToFavorites($event, song)"
+                placement="top"
+                ngbTooltip="Agregar a la lista de favorita...pero solo si la cancion no esta en su lista">
+                <i class="fa-star"
+                [ngClass]="{'far' : !songService.isSongAFav(song), 'fas': songService.isSongAFav(song) }"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
-  <table class="table table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Titulo</th>
-        <th scope="col">Artista</th>
-        <th scope="col">Genero</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let song of songService.allSongs | songFilter : searchText; let i = index">
-        <th scope="row">{{song.id}}</th>
-        <td>{{song.titulo}}</td>
-        <td>{{song.artista}}</td>
-        <td>{{song.genero}}</td>
-        <td>
-          <button type="button" class="btn btn-outline-success"
-                  (click)="addToQueue(song)"
-                  placement="top"
-                  ngbTooltip="Agregar a la lista...pero solo si va a cantar, no hará de agregar por las puras.">
-            <i class="fas fa-plus-circle"></i>
-          </button>
-          <button type="button" class="btn btn-outline-warning"
-                  [disabled]="songService.isSongAFav(song)"
-                  (click)="songService.addSongToFavorites($event, song)"
-                  placement="top"
-                  ngbTooltip="Agregar a la lista de favorita...pero solo si la cancion no esta en su lista">
-            <i class="fa-star"
-               [ngClass]="{'far' : !songService.isSongAFav(song), 'fas': songService.isSongAFav(song) }"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+}

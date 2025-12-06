@@ -2,57 +2,67 @@
   <div class="jumbotron mx-5 pb-1">
     <h1 class="display-4">{{ appTitle }}</h1>
     <p class="lead">{{ appDescription }}</p>
-    <div *ngIf="!songService.songQueue || songService.songQueue.length <= 0">
-      <hr class="my-4">
-      <p>Recuerde que no hay que ponerse bravo si no funciona, solo es para pasarla bien con los panas, mijines o broders y cantar con el shungo a todo pulmón</p>
-      <a class="btn btn-primary btn-lg" routerLink="/about" role="button">Más información</a>
-    </div>
-  </div>
-  <div *ngIf="songService.songQueue && songService.songQueue.length > 0" class="mx-2 mb-5">
-    <div class="float-right">
-      <div *ngIf="refreshing" class="d-inline-block mr-2">
-        <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
+    @if (!songService.songQueue || songService.songQueue.length <= 0) {
+      <div>
+        <hr class="my-4">
+        <p>Recuerde que no hay que ponerse bravo si no funciona, solo es para pasarla bien con los panas, mijines o broders y cantar con el shungo a todo pulmón</p>
+        <a class="btn btn-primary btn-lg" routerLink="/about" role="button">Más información</a>
       </div>
-      <a class="btn btn-primary btn-sm text-white" (click)="manualRefreshQueue()" role="button">Actualizar lista</a>
+    }
+  </div>
+  @if (songService.songQueue && songService.songQueue.length > 0) {
+    <div class="mx-2 mb-5">
+      <div class="float-right">
+        @if (refreshing) {
+          <div class="d-inline-block mr-2">
+            <div class="spinner-border spinner-border-sm text-primary text-center" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        }
+        <a class="btn btn-primary btn-sm text-white" (click)="manualRefreshQueue()" role="button">Actualizar lista</a>
+      </div>
+      <table class="table table-responsive-sm table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Número</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Artista</th>
+            <th scope="col">Genero</th>
+            <th scope="col">"Cantante"</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (song of songService.songQueue; track song; let i = $index) {
+            <tr [ngClass]="{'bg-success' : i == 0}">
+              <th scope="row">{{i}}</th>
+              <td>{{song.id}}</td>
+              <td>{{song.titulo}}</td>
+              <td>{{song.artista}}</td>
+              <td>{{song.genero}}</td>
+              <td>{{song.cantante}}</td>
+              <td>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteFromQueue(song)">
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
-    <table class="table table-responsive-sm table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Número</th>
-          <th scope="col">Titulo</th>
-          <th scope="col">Artista</th>
-          <th scope="col">Genero</th>
-          <th scope="col">"Cantante"</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let song of songService.songQueue; let i = index" [ngClass]="{'bg-success' : i == 0}">
-          <th scope="row">{{i}}</th>
-          <td>{{song.id}}</td>
-          <td>{{song.titulo}}</td>
-          <td>{{song.artista}}</td>
-          <td>{{song.genero}}</td>
-          <td>{{song.cantante}}</td>
-          <td>
-            <button type="button" class="btn btn-outline-danger" (click)="deleteFromQueue(song)">
-              <i class="fas fa-minus-circle"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="!songService.songQueue || songService.songQueue.length <= 0" class="mx-auto w-75 p-3">
-    <blockquote class="blockquote display-4">
-      <p>
-        La lista de canciones esta vacía. No sea malito y de buscando sus canciones arriba (en la esquina superior derecha),
-        ahí donde dice <span><em><strong>"De Buscando"</strong></em></span>, ahí. Encuentre la canción, y cuando la seleccione, se agregará a la lista.
-      </p>
-      <p>Verá que no es tan difícil buscar, alzando pelito; no me hará tener iras verá!</p>
-    </blockquote>
-  </div>
+  }
+  @if (!songService.songQueue || songService.songQueue.length <= 0) {
+    <div class="mx-auto w-75 p-3">
+      <blockquote class="blockquote display-4">
+        <p>
+          La lista de canciones esta vacía. No sea malito y de buscando sus canciones arriba (en la esquina superior derecha),
+          ahí donde dice <span><em><strong>"De Buscando"</strong></em></span>, ahí. Encuentre la canción, y cuando la seleccione, se agregará a la lista.
+        </p>
+        <p>Verá que no es tan difícil buscar, alzando pelito; no me hará tener iras verá!</p>
+      </blockquote>
+    </div>
+  }
 </div>

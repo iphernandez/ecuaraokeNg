@@ -5,9 +5,10 @@ import { Message } from "../../models/message";
 import { Tag, EnvironmentTag } from "../../models/tag.enum";
 
 @Component({
-  selector: "app-messages",
-  templateUrl: "./messages.component.html",
-  styleUrls: ["./messages.component.scss"],
+    selector: "app-messages",
+    templateUrl: "./messages.component.html",
+    styleUrls: ["./messages.component.scss"],
+    standalone: false
 })
 export class MessagesComponent implements OnInit {
   tags = Tag;
