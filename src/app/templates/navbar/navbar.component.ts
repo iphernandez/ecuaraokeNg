@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap, catchError } from 'rxjs/operators';
 
@@ -14,6 +14,7 @@ import { Song } from '../../models/song';
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NavbarComponent implements OnInit {

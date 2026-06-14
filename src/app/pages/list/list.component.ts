@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { SongService } from '../../services/song.service';
 import { SongFilterPipe } from '../../services/song-filter.pipe';
@@ -7,6 +7,7 @@ import { SongFilterPipe } from '../../services/song-filter.pipe';
     selector: 'app-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ListComponent implements OnInit {
